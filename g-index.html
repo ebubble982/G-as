@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>important question</title>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Crimson Text', serif;
+            background: linear-gradient(to bottom, #e8f4f8, #d4e9f0);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 450px;
+            width: 100%;
+            background: white;
+            padding: 50px 40px;
+            border-radius: 3px;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+        }
+
+        h1 {
+            font-size: 32px;
+            margin-bottom: 25px;
+            font-weight: 600;
+            color: #2c2c2c;
+        }
+
+        p {
+            font-size: 20px;
+            line-height: 1.6;
+            margin-bottom: 35px;
+            color: #4a4a4a;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        button {
+            flex: 1;
+            padding: 15px 25px;
+            font-size: 18px;
+            font-family: 'Crimson Text', serif;
+            cursor: pointer;
+            border: 2px solid #333;
+            background: white;
+            transition: all 0.2s;
+            border-radius: 2px;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .btn-yes {
+            background: #a8d8ea;
+            border-color: #a8d8ea;
+            color: #2c2c2c;
+            font-weight: 600;
+        }
+
+        .btn-yes:hover {
+            background: #8ec9dc;
+            border-color: #8ec9dc;
+        }
+
+        .btn-no {
+            background: white;
+            color: #666;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .success-content {
+            text-align: center;
+        }
+
+        .success-content h1 {
+            color: #5ba3c0;
+            margin-bottom: 20px;
+        }
+
+        /* Hearts animation */
+        .heart {
+            position: fixed;
+            font-size: 30px;
+            pointer-events: none;
+            animation: float-up 3s ease-in forwards;
+        }
+
+        @keyframes float-up {
+            0% {
+                opacity: 1;
+                transform: translateY(0) scale(0);
+            }
+            50% {
+                opacity: 1;
+                transform: translateY(-200px) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-400px) scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="mainContent">
+        <h1>so i have a question</h1>
+        <p>ive been thinking about this for a while and... i really like spending time with you. youre amazing and so perfect.</p>
+        <p>will you be my girlfriend?</p>
+        <div class="buttons">
+            <button class="btn-yes" onclick="sayYes()">yes</button>
+            <button class="btn-no" id="noBtn" onclick="handleNo()">no</button>
+        </div>
+    </div>
+
+    <div class="container hidden" id="successMessage">
+        <div class="success-content">
+            <h1>YAYYYYY!</h1>
+            <p>you js made me so happy!!</p>
+            <p style="font-size: 18px; color: #888;">i cant believe youre my gf now!!</p>
+        </div>
+    </div>
+
+    <script>
+        let noClickCount = 0;
+        
+        function handleNo() {
+            noClickCount++;
+            const noBtn = document.getElementById('noBtn');
+            
+            if (noClickCount >= 7) {
+                window.location.href = 'g-no.html';
+            } else {
+                const newSize = 18 - (noClickCount * 1.8);
+                const newPadding = 15 - (noClickCount * 1.5);
+                noBtn.style.fontSize = newSize + 'px';
+                noBtn.style.padding = newPadding + 'px ' + (newPadding + 10) + 'px';
+                
+                const messages = ['no...?', 'wait no', 'no??', 'really?', 'seriously?', 'cmon'];
+                if (noClickCount <= messages.length) {
+                    noBtn.textContent = messages[noClickCount - 1];
+                }
+            }
+        }
+
+        function sayYes() {
+            document.getElementById('mainContent').classList.add('hidden');
+            document.getElementById('successMessage').classList.remove('hidden');
+            
+            // Create floating hearts
+            const heartSymbols = ['💙', '💚', '💛', '💜', '🤍'];
+            
+            for (let i = 0; i < 30; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.className = 'heart';
+                    heart.textContent = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+                    heart.style.left = Math.random() * 100 + 'vw';
+                    heart.style.bottom = '-50px';
+                    heart.style.animationDelay = (Math.random() * 0.5) + 's';
+                    document.body.appendChild(heart);
+                    
+                    setTimeout(() => heart.remove(), 3000);
+                }, i * 100);
+            }
+        }
+    </script>
+</body>
+</html>
