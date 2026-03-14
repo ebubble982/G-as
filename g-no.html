@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hold on</title>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Crimson Text', serif;
+            background: linear-gradient(to bottom, #f0e8e8, #e4d8d8);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 450px;
+            width: 100%;
+            background: white;
+            padding: 50px 40px;
+            border-radius: 3px;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+        }
+
+        h1 {
+            font-size: 32px;
+            margin-bottom: 25px;
+            font-weight: 600;
+            color: #2c2c2c;
+        }
+
+        p {
+            font-size: 20px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            color: #4a4a4a;
+        }
+
+        ul {
+            text-align: left;
+            margin: 25px 0;
+            padding-left: 25px;
+            color: #4a4a4a;
+        }
+
+        li {
+            margin-bottom: 12px;
+            font-size: 18px;
+            line-height: 1.5;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 18px;
+            font-family: 'Crimson Text', serif;
+            cursor: pointer;
+            border: 2px solid #a8d8ea;
+            background: #a8d8ea;
+            color: #2c2c2c;
+            font-weight: 600;
+            transition: all 0.2s;
+            border-radius: 2px;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background: #8ec9dc;
+            border-color: #8ec9dc;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .note {
+            font-size: 16px;
+            color: #888;
+            margin-top: 20px;
+            font-style: italic;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .success-content {
+            text-align: center;
+        }
+
+        .success-content h1 {
+            color: #5ba3c0;
+            margin-bottom: 20px;
+        }
+
+        /* Hearts animation */
+        .heart {
+            position: fixed;
+            font-size: 30px;
+            pointer-events: none;
+            animation: float-up 3s ease-in forwards;
+        }
+
+        @keyframes float-up {
+            0% {
+                opacity: 1;
+                transform: translateY(0) scale(0);
+            }
+            50% {
+                opacity: 1;
+                transform: translateY(-200px) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-400px) scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="pleadingContent">
+        <h1>wait hold on</h1>
+        
+        <p>you clicked no 7 times... are you sure about this?</p>
+
+        <p>let me just say:</p>
+
+        <ul>
+            <li>i lit care about you so much</li>
+            <li>i think we have something really special</li>
+            <li>i want to be there for you</li>
+            <li>i really know we are perf together</li>
+        </ul>
+
+        
+
+        <p>sooo one more time... will you be my girlfriend?</p>
+
+        <button onclick="sayYes()">
+            yes okay
+        </button>
+
+        <p class="note">(yeah theres no no button anymore)</p>
+    </div>
+
+    <div class="container hidden" id="successMessage">
+        <div class="success-content">
+            <h1>YAYYYY!</h1>
+            <p>you just made me so happy!!</p>
+            <p style="font-size: 18px; color: #888;">i cant believe youre my girlfriend now!!</p>
+        </div>
+    </div>
+
+    <script>
+        function sayYes() {
+            console.log('sayYes called'); // Debug log
+            
+            const pleadingContent = document.getElementById('pleadingContent');
+            const successMessage = document.getElementById('successMessage');
+            
+            if (pleadingContent) pleadingContent.classList.add('hidden');
+            if (successMessage) successMessage.classList.remove('hidden');
+            
+            // Create floating hearts
+            const heartSymbols = ['💖', '🌻', '🌹', '🌷', '💐'];
+            
+            for (let i = 0; i < 30; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.className = 'heart';
+                    heart.textContent = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+                    heart.style.left = Math.random() * 100 + 'vw';
+                    heart.style.bottom = '-50px';
+                    heart.style.animationDelay = (Math.random() * 0.5) + 's';
+                    document.body.appendChild(heart);
+                    
+                    setTimeout(() => heart.remove(), 3000);
+                }, i * 100);
+            }
+        }
+        
+        // Test on page load
+        console.log('Page loaded');
+        console.log('pleadingContent exists:', document.getElementById('pleadingContent'));
+        console.log('successMessage exists:', document.getElementById('successMessage'));
+    </script>
+</body>
+</html>
